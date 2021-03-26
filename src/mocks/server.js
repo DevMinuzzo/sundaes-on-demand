@@ -1,4 +1,11 @@
+import { rest } from "msw"
 import { setupServer } from "msw/node"
-import { handlers } from "./handlers"
 
-export const server = setupServer(...handlers)
+/* mocks */
+import scoopMock from './api-mocks/scoops'
+
+const mocks = [
+    ...scoopMock(rest)
+]
+
+export const server = setupServer(...mocks)
