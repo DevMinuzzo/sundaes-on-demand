@@ -3,13 +3,16 @@ import { createContext, useContext, useState, useMemo, useEffect } from 'react'
 /* Consts */
 import { pricePerItem } from '../constants'
 
+/* Utils */
+import { formatCurrency } from '../helpers/formattingHelper'
+
 const OrderDetailsContext = createContext()
 
 // create custom hook to check whether we're inside a provider
 export function useOrderDetailsContext() {
   const context = useContext(OrderDetailsContext)
   if (!context) {
-    throw new Error('userOrderDetails must be used within an OrderDetailsProvider')
+    throw new Error('userOrderDetailsContext must be used within an OrderDetailsProvider')
   }
   return context
 }
@@ -27,10 +30,11 @@ export function OrderDetailsProvider(props) {
     scoops: new Map(),
     toppings: new Map()
   })
+  const zeroCurrency = formatCurrency(0)
   const [totals, setTotals] = useState({
-    scoops: 0,
-    toppings: 0,
-    grandTotal: 0
+    scoops: zeroCurrency,
+    toppings: zeroCurrency,
+    grandTotal: zeroCurrency
   })
 
   useEffect(() => {
@@ -38,9 +42,9 @@ export function OrderDetailsProvider(props) {
     const toppingsSubtotal = calculateSubtotal('toppings', optionCounts)
     const grandTotal = scoopsSubtotal + toppingsSubtotal
     setTotals({
-      scoops: scoopsSubtotal,
-      toppings: toppingsSubtotal,
-      grandTotal
+      scoops: formatCurrency(scoopsSubtotal),
+      toppings: formatCurrency(toppingsSubtotal),
+      grandTotal: formatCurrency(grandTotal)
     })
   }, [optionCounts])
 
