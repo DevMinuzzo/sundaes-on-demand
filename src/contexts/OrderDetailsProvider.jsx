@@ -3,11 +3,11 @@ import { createContext, useContext, useState, useMemo, useEffect } from 'react'
 /* Consts */
 import { pricePerItem } from '../constants'
 
-const OrderDetails = createContext()
+const OrderDetailsContext = createContext()
 
 // create custom hook to check whether we're inside a provider
-export function useOrderDetails() {
-  const context = useContext(OrderDetails)
+export function useOrderDetailsContext() {
+  const context = useContext(OrderDetailsContext)
   if (!context) {
     throw new Error('userOrderDetails must be used within an OrderDetailsProvider')
   }
@@ -58,5 +58,5 @@ export function OrderDetailsProvider(props) {
     return [{ ...optionCounts, totals }, updateItemCount]
   }, [optionCounts, totals])
 
-  return <OrderDetails.Provider value={value} {...props} />
+  return <OrderDetailsContext.Provider value={value} {...props} />
 }
