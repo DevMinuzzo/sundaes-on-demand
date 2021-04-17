@@ -32,9 +32,9 @@ test('Order phases for happy path', async () => {
   const toppingsHeading = screen.getByRole('heading', { name: 'Toppings: $1.50' })
   expect(toppingsHeading).toBeInTheDocument()
 
-  expect(screen.getByText(/1 vanilla/i).toBeInTheDocument())
-  expect(screen.getByText(/2 chocolate/i).toBeInTheDocument())
-  expect(screen.getByText(/cherries/i).toBeInTheDocument())
+  expect(screen.getByText(/1 vanilla/i)).toBeInTheDocument()
+  expect(screen.getByText(/2 chocolate/i)).toBeInTheDocument()
+  expect(screen.getByText(/cherries/i)).toBeInTheDocument()
 
   // accept terms and conditions and click button to confirm order
   const tcCheckbox = screen.getByRole('checkbox', { name: /terms and conditions/i })
@@ -47,7 +47,7 @@ test('Order phases for happy path', async () => {
   const thankYouHeader = await screen.findByRole('heading', { name: /thank you/i })
   expect(thankYouHeader).toBeInTheDocument()
 
-  const orderNumber = await screen.findByTest(/order number/i)
+  const orderNumber = await screen.findByText(/order number/i)
   expect(orderNumber).toBeInTheDocument()
 
   // click on "new order" button on confirmation page
