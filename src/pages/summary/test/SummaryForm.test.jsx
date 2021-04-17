@@ -3,7 +3,7 @@ import userEvent from "@testing-library/user-event"
 import SummaryForm from "../SummaryForm"
 
 test("Initial conditions", () => {
-  render(<SummaryForm />)
+  render(<SummaryForm setOrderPhase={jest.fn()} />)
   const checkbox = screen.getByRole("checkbox", {
     name: /terms and conditions/i,
   })
@@ -14,7 +14,7 @@ test("Initial conditions", () => {
 })
 
 test("Checkbox should enables the submit button when checked and disables when not checked", () => {
-  render(<SummaryForm />)
+  render(<SummaryForm setOrderPhase={jest.fn()} />)
   const checkbox = screen.getByRole("checkbox", {
     name: /terms and conditions/i,
   })
@@ -28,7 +28,7 @@ test("Checkbox should enables the submit button when checked and disables when n
 })
 
 test('popover responds to hover', async () => {
-  render(<SummaryForm />)
+  render(<SummaryForm setOrderPhase={jest.fn()} />)
   // popover starts out hidden
   const nullPopover = screen.queryByText(/no ice cream will actually be delivered/i)
   expect(nullPopover).not.toBeInTheDocument()

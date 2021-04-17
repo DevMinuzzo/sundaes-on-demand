@@ -8,7 +8,7 @@ test('handles error for scoops and toppings routes', async () => {
     rest.get('http://localhost:3030/scoops', (_, res, ctx) => res(ctx.status(500))),
     rest.get('http://localhost:3030/toppings', (_, res, ctx) => res(ctx.status(500)))
   )
-  render(<OrderEntry />)
+  render(<OrderEntry setOrderPhase={jest.fn()}/>)
 
   // Find both scoops and toppings alerts
   await waitFor(async () => {
