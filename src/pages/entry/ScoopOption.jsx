@@ -8,10 +8,18 @@ export default function ScoopOptions({ name, imagePath, updateItemCount }) {
 
   const handleChange = (event) => {
     const currentValue = event.target.value
-    updateItemCount(name, currentValue)
-
+    
     const currentValueFloat = parseFloat(currentValue)
-    setIsValid(currentValueFloat >= 0 && currentValueFloat <= 10 && Math.floor(currentValueFloat) === currentValueFloat)
+    const valueIsValid = 
+      0 <= currentValueFloat &&
+      currentValueFloat <= 10 &&
+      Math.floor(currentValueFloat) === currentValueFloat
+      
+      setIsValid(valueIsValid)
+
+      if(valueIsValid) {
+        updateItemCount(name, currentValue)
+      }
   }
   
   return (
